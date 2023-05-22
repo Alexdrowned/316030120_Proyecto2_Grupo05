@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------------------------*/
-/* ----------------  Práctica      7             -----------*/
+/* ----------------  Práctica      8             -----------*/
 /*-----------------    2023-2   ---------------------------*/
 /*------------- Alumno:Bautista Beltrán Axel Arturo---------------*/
 /*------------- No. Cuenta: 316030120---------------*/
@@ -27,12 +27,6 @@
 #include <Skybox.h>
 #include <iostream>
 
-
-//
-// 
-// 
-// 
-// 
 #include <iostream>
 #include <random>
 #include <ctime>
@@ -156,16 +150,16 @@ void interpolation(void)
 
 void animate(void)
 {
-	myPosition.x = 100.0f * cos(myVariable);
-	myPosition.z = 100.0f * sin(myVariable);
-	myVariable += 0.1f;
-	srand(time(NULL));
-	r = rand() / static_cast<float>(RAND_MAX);
-	g = rand() / static_cast<float>(RAND_MAX);
-	b = rand() / static_cast<float>(RAND_MAX);
-	variableSol += 0.01f;
-	lightDirection.x = 100.0f * sin(variableSol);
-	lightDirection.y = 100.0f * cos(variableSol);
+	//myPosition.x = 100.0f * cos(myVariable);
+	//myPosition.z = 100.0f * sin(myVariable);
+	//myVariable += 0.1f;
+	//srand(time(NULL));
+	//r = rand() / static_cast<float>(RAND_MAX);
+	//g = rand() / static_cast<float>(RAND_MAX);
+	//b = rand() / static_cast<float>(RAND_MAX);
+	//variableSol += 0.01f;
+	//lightDirection.x = 100.0f * sin(variableSol);
+	//lightDirection.y = 100.0f * cos(variableSol);
 	if (play)
 	{
 		if (i_curr_steps >= i_max_steps) //end of animation between frames?
@@ -302,6 +296,9 @@ int main()
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
+	Model creeper("resources/objects/creeper/creeper.obj");
+
+
 	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
 	animacionPersonaje.initShaders(animShader.ID);
 
@@ -346,7 +343,7 @@ int main()
 		//Setup Advanced Lights
 		staticShader.setVec3("viewPos", camera.Position);
 		staticShader.setVec3("dirLight.direction", lightDirection);
-		staticShader.setVec3("dirLight.ambient", glm::vec3(0.0f, 0.0f, 0.0f));
+		staticShader.setVec3("dirLight.ambient", glm::vec3(0.3f, 0.3f, 0.3f));
 		staticShader.setVec3("dirLight.diffuse", glm::vec3(0.5f, .50f, .50f));
 		staticShader.setVec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f));
 
@@ -539,6 +536,13 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0));
 		staticShader.setMat4("model", model);
 		cabeza.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+		model = glm::translate(model, glm::vec3(posX+20, posY+10, posZ+20));
+		//model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+		staticShader.setMat4("model", model);
+		creeper.Draw(staticShader);
+
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Caja Transparente --- Siguiente Práctica
 		// -------------------------------------------------------------------------------------------------------------------------

@@ -27,8 +27,8 @@
     <None Include="shaders\skybox.vs" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Final.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
