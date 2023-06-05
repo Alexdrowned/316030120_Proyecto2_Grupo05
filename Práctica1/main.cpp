@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------------------------*/
-/* ----------------  Práctica      8             -----------*/
+/* ----------------  Proyecto                   -----------*/
 /*-----------------    2023-2   ---------------------------*/
 /*------------- Alumno:Bautista Beltrán Axel Arturo---------------*/
 /*------------- No. Cuenta: 316030120---------------*/
@@ -300,6 +300,8 @@ int main()
 
 	Model cesped("resources/objects/cesped/cesped.obj");
 
+	Model casa("resources/objects/casa/casa.obj");
+
 
 	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -442,7 +444,11 @@ int main()
 		staticShader.setMat4("model", model);
 		cesped.Draw(staticShader);
 		
-
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		casa.Draw(staticShader);
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Caja Transparente --- Siguiente Práctica
 		// -------------------------------------------------------------------------------------------------------------------------
