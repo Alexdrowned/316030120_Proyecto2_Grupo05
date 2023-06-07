@@ -282,32 +282,11 @@ int main()
 
 	// load models
 	// -----------
-	Model piso("resources/objects/piso/piso.obj");
-	Model botaDer("resources/objects/Personaje/bota.obj");
-	Model piernaDer("resources/objects/Personaje/piernader.obj");
-	Model piernaIzq("resources/objects/Personaje/piernader.obj");
-	Model torso("resources/objects/Personaje/torso.obj");
-	Model brazoDer("resources/objects/Personaje/brazoder.obj");
-	Model brazoIzq("resources/objects/Personaje/brazoizq.obj");
-	Model cabeza("resources/objects/Personaje/cabeza.obj");
-	Model carro("resources/objects/lambo/carroceria.obj");
-	Model llanta("resources/objects/lambo/Wheel.obj");
-	Model casaVieja("resources/objects/casa/OldHouse.obj");
-	//Model cubo("resources/objects/cubo/cube02.obj");
-	Model casaDoll("resources/objects/casa/DollHouse.obj");
-
-	Model creeper("resources/objects/creeper/creeper.obj");
 
 	Model cesped("resources/objects/cesped/cesped.obj");
 
 	Model casa("resources/objects/casa/casa.obj");
 
-
-	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
-	animacionPersonaje.initShaders(animShader.ID);
-
-	ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
-	ninja.initShaders(animShader.ID);*/
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -440,13 +419,13 @@ int main()
 
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.2f));
+		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		cesped.Draw(staticShader);
 		
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.2f));
+		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		casa.Draw(staticShader);
 		// -------------------------------------------------------------------------------------------------------------------------

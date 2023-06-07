@@ -1,6 +1,16 @@
 # Blender 3.4.1 MTL File: 'casa.blend'
 # www.blender.org
 
+newmtl Cama
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd cama.png
+
 newmtl Casa_interior
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
@@ -10,6 +20,26 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd casaInterior.png
+
+newmtl Feathers
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd gallinaTexturas.png
+
+newmtl Jarron
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd jarron.png
 
 newmtl MaderaGris
 Ns 250.000000
@@ -41,6 +71,36 @@ d 1.000000
 illum 2
 map_Kd texturaBaseCasaV2.png
 
+newmtl MaderaSillas
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd maderaSillas.png
+
+newmtl Material
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd armario.png
+
+newmtl Material.001
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd texturaEspada.png
+
 newmtl Material.004
 Ns 250.000000
 Ka 1.000000 1.000000 1.000000
@@ -50,6 +110,16 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd techotejas.png
+
+newmtl SillaPosadera
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd sillaPosadera.png
 
 newmtl TechoComplemento
 Ns 250.000000
