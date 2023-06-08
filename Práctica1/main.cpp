@@ -83,6 +83,9 @@ bool turnOn = true;
 float	zGallina = 0.0f,
 		rotarGallina = 0.0f;
 
+bool goldRecorrido = true;
+float rotarGold = 0.0f;
+
 #define MAX_FRAMES 9
 int i_max_steps = 60;
 int i_curr_steps = 0;
@@ -108,6 +111,7 @@ int playIndex = 0;
 
 void animate(void)
 {
+	rotarGold += 0.5f;
 	if (animacion) {
 		if (grecorrido1) {
 			zGallina += 0.01f;
@@ -228,6 +232,8 @@ int main()
 	Model casa("resources/objects/casa/casa.obj");
 
 	Model gallina("resources/objects/gallina/gallina.obj");
+
+	Model gold("resources/objects/golds/goldSkall.obj");
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -351,13 +357,6 @@ int main()
 		staticShader.setMat4("projection", projection);
 		staticShader.setMat4("view", view);
 
-		/*
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.2f));
-		staticShader.setMat4("model", model);
-		piso.Draw(staticShader);*/
-
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
@@ -376,6 +375,15 @@ int main()
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		gallina.Draw(staticShader);
+
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-13.0f, 1.6f, -10.30f));
+		model = glm::rotate(model, glm::radians(270.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(rotarGold), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		gold.Draw(staticShader);
 
 
 		skyboxShader.use();
