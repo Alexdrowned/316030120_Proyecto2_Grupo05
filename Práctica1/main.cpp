@@ -74,24 +74,14 @@ glm::vec3 myPosition(0.0f, 0.0f, 0.0f);
 float	movAuto_x = 0.0f,
 		movAuto_z = 0.0f,
 		orienta = 0.0f;
-bool	animacion = false,
-		recorrido1 = true,
-		recorrido2 = false,
-		recorrido3 = false,
-		recorrido4 = false;
+bool	animacion = true;
+bool grecorrido1 = true, grecorrido2, grecorrido3, grecorrido4 = false;
 bool turnOn = true;
 
 //Keyframes (Manipulación y dibujo)
-float	posX = 0.0f,
-		posY = 0.0f,
-		posZ = 0.0f,
-		rotRodIzq = 0.0f,
-		giroMonito = 0.0f;
-float	incX = 0.0f,
-		incY = 0.0f,
-		incZ = 0.0f,
-		rotInc = 0.0f,
-		giroMonitoInc = 0.0f;
+
+float	zGallina = 0.0f,
+		rotarGallina = 0.0f;
 
 #define MAX_FRAMES 9
 int i_max_steps = 60;
@@ -112,91 +102,41 @@ int FrameIndex = 0;			//introducir número en caso de tener Key guardados
 bool play = false;
 int playIndex = 0;
 
-void saveFrame(void)
-{
-	//printf("frameindex %d\n", FrameIndex);
-	std::cout << "Frame Index = " << FrameIndex << std::endl;
 
-	KeyFrame[FrameIndex].posX = posX;
-	KeyFrame[FrameIndex].posY = posY;
-	KeyFrame[FrameIndex].posZ = posZ;
 
-	KeyFrame[FrameIndex].rotRodIzq = rotRodIzq;
-	KeyFrame[FrameIndex].giroMonito = giroMonito;
 
-	FrameIndex++;
-}
-
-void resetElements(void)
-{
-	posX = KeyFrame[0].posX;
-	posY = KeyFrame[0].posY;
-	posZ = KeyFrame[0].posZ;
-
-	rotRodIzq = KeyFrame[0].rotRodIzq;
-	giroMonito = KeyFrame[0].giroMonito;
-}
-
-void interpolation(void)
-{
-	incX = (KeyFrame[playIndex + 1].posX - KeyFrame[playIndex].posX) / i_max_steps;
-	incY = (KeyFrame[playIndex + 1].posY - KeyFrame[playIndex].posY) / i_max_steps;
-	incZ = (KeyFrame[playIndex + 1].posZ - KeyFrame[playIndex].posZ) / i_max_steps;
-
-	rotInc = (KeyFrame[playIndex + 1].rotRodIzq - KeyFrame[playIndex].rotRodIzq) / i_max_steps;
-	giroMonitoInc = (KeyFrame[playIndex + 1].giroMonito - KeyFrame[playIndex].giroMonito) / i_max_steps;
-
-}
 
 void animate(void)
 {
-	//myPosition.x = 100.0f * cos(myVariable);
-	//myPosition.z = 100.0f * sin(myVariable);
-	//myVariable += 0.1f;
-	//srand(time(NULL));
-	//r = rand() / static_cast<float>(RAND_MAX);
-	//g = rand() / static_cast<float>(RAND_MAX);
-	//b = rand() / static_cast<float>(RAND_MAX);
-	//variableSol += 0.01f;
-	//lightDirection.x = 100.0f * sin(variableSol);
-	//lightDirection.y = 100.0f * cos(variableSol);
-	if (play)
-	{
-		if (i_curr_steps >= i_max_steps) //end of animation between frames?
-		{
-			playIndex++;
-			if (playIndex > FrameIndex - 2)	//end of total animation?
-			{
-				std::cout << "Animation ended" << std::endl;
-				//printf("termina anim\n");
-				playIndex = 0;
-				play = false;
-			}
-			else //Next frame interpolations
-			{
-				i_curr_steps = 0; //Reset counter
-								  //Interpolation
-				interpolation();
+	if (animacion) {
+		if (grecorrido1) {
+			zGallina += 0.01f;
+			if (zGallina >= 7.0f) {
+				grecorrido1 = false;
+				grecorrido2 = true;
 			}
 		}
-		else
-		{
-			//Draw animation
-			posX += incX;
-			posY += incY;
-			posZ += incZ;
-
-			rotRodIzq += rotInc;
-			giroMonito += giroMonitoInc;
-
-			i_curr_steps++;
+		if (grecorrido2) {
+			rotarGallina += 1;
+			if (rotarGallina >= 180.0f) {
+				grecorrido2 = false;
+				grecorrido3 = true;
+			}
 		}
-	}
-
-	//Vehículo
-	if (animacion)
-	{
-		movAuto_z += 3.0f;
+		if (grecorrido3) {
+			zGallina -= 0.01f;
+			if (zGallina <= 0.0f) {
+				grecorrido4 = true;
+				grecorrido3 = false;
+			}
+		}
+		if (grecorrido4) {
+			rotarGallina -= 1.0f;
+			if (rotarGallina <= 0.0f) {
+				grecorrido1 = true;
+				grecorrido4 = false;
+			}
+		}
 	}
 }
 
@@ -287,6 +227,7 @@ int main()
 
 	Model casa("resources/objects/casa/casa.obj");
 
+	Model gallina("resources/objects/gallina/gallina.obj");
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -428,23 +369,15 @@ int main()
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		casa.Draw(staticShader);
-		// -------------------------------------------------------------------------------------------------------------------------
-		// Caja Transparente --- Siguiente Práctica
-		// -------------------------------------------------------------------------------------------------------------------------
-		/*glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -70.0f));
-		model = glm::scale(model, glm::vec3(5.0f));
-		staticShader.setMat4("model", model);
-		cubo.Draw(staticShader);
-		glEnable(GL_BLEND);*/
-		// -------------------------------------------------------------------------------------------------------------------------
-		// Termina Escenario
-		// -------------------------------------------------------------------------------------------------------------------------
 
-		//-------------------------------------------------------------------------------------
-		// draw skybox as last
-		// -------------------
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-15.0f, -1.4f, -9.0f + zGallina));
+		model = glm::rotate(model, glm::radians(rotarGallina), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		gallina.Draw(staticShader);
+
+
 		skyboxShader.use();
 		skybox.Draw(skyboxShader, view, projection, camera);
 
@@ -482,76 +415,7 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		camera.ProcessKeyboard(LEFT, (float)deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, (float)deltaTime);
-	
-	//camera.Position.x = 100.0f;
-	//camera.Position.y = 100.0f;
-	//camera.Position.z = 100.0f;
 
-	//To Configure Model
-	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
-		posZ++;
-	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
-		posZ--;
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
-		posX--;
-	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
-		posX++;
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
-		rotRodIzq--;
-	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-		rotRodIzq++;
-	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
-		giroMonito--;
-	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
-		giroMonito++;
-	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
-		lightPosition.x++;
-	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
-		lightPosition.x--;
-
-	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
-		turnOn ^= true;
-		if (turnOn == true) {
-			turnLight = 1.0f;
-		}
-		else
-			turnLight = 0.0f;
-	}
-
-
-	//Car animation
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-		animacion ^= true;
-
-	//To play KeyFrame animation 
-	if (key == GLFW_KEY_P && action == GLFW_PRESS)
-	{
-		if (play == false && (FrameIndex > 1))
-		{
-			std::cout << "Play animation" << std::endl;
-			resetElements();
-			//First Interpolation				
-			interpolation();
-
-			play = true;
-			playIndex = 0;
-			i_curr_steps = 0;
-		}
-		else
-		{
-			play = false;
-			std::cout << "Not enough Key Frames" << std::endl;
-		}
-	}
-
-	//To Save a KeyFrame
-	if (key == GLFW_KEY_L && action == GLFW_PRESS)
-	{
-		if (FrameIndex < MAX_FRAMES)
-		{
-			saveFrame();
-		}
-	}
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
