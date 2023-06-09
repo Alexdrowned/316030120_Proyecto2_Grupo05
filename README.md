@@ -1,5 +1,9 @@
 ## Bienvenido al proyecto de recreación de la casa del rancho lon lon
 
+### Atención, las imagenes que tiene este readme no pueden leerse en el .md sin embargo se ha puesto un README en formato pdf para su lectura
+
+### Beware, the images in this file can't be seen on .md however we have a .pdf file
+
 Este pequeño README, tendrá los elementos necesarios para guiarte en el proceso de descubrir el repositorio
 
 Para echarle un primer vistazo al proyecto de manera inmediata al proyecto, ya sea que hayas descargado en Zip o a través de Git clone,
